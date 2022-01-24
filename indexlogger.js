@@ -1,5 +1,9 @@
 const redux = require('redux');
+const reduxLogger = require('redux-logger')
 const createStore = redux.createStore
+const logger = reduxLogger.createLogger()
+const applyMiddleware = redux.applyMiddleware
+const combineReducer = redux.combineReducers
 
 const BUY_CAKE= 'BUY_CAKE' ;
 const BUY_ICECREAM = "BUY_ICECREAM"
@@ -24,25 +28,34 @@ const initialState = {
     noOfIce : 20
 }
 //reducer 
-const Reducers =(state = initialState , action) =>{
+const CakeReducer =(state = initialState , action) =>{
     switch(action.type){   // Here action type is checked and according to it the object is returned by reducer .
         case BUY_CAKE : return{
             ...state,
             noOfCakes : state.noOfCakes - 1
         }
-        
+        default : return state 
+    }
+} 
+const IceReducer =(state = initialState , action) =>{
+    switch(action.type){   // Here action type is checked and according to it the object is returned by reducer .
         case BUY_ICECREAM : return{
             ...state,
             noOfIce : state.noOfIce - 1
         }
-
         default : return state 
     }
 } 
 
-const store = createStore(Reducers)
+// root reducer  which combines the reducers 
+const rootReducer = combineReducer({
+    Cake : CakeReducer,
+    IceCream : IceReducer
+})
+
+const store = createStore(rootReducer,applyMiddleware(logger));
 console.log("Current State : " , store.getState());
-const unsubscribe = store.subscribe(()=> console.log("Updated State : ", store.getState()))
+const unsubscribe = store.subscribe(()=> {})
 store.dispatch(buyCake());
 store.dispatch(buyCake());
 store.dispatch(buyCake()); //Buy Cake is action here. Dispatch tells store to buy cake . 
