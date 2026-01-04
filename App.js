@@ -45,7 +45,7 @@ function App() {
   // let list = ["shreya ghoshal","Arijit Singh","atif aslam"];
   return (
       
-    <div className="App">
+    <div className="Apuuup">
       <InputHook></InputHook>
       {/* <Click></Click> */}
       {/* <IncDec></IncDec> */}
