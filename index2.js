@@ -21,7 +21,7 @@ function buyIceCream() {
 }
 
 const initialState = {
-    noOfCakes : 10,
+    noOfCakes : 90,
     noOfIce : 20
 }
 //reducer 
